@@ -1,0 +1,129 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+h1 {
+    color: #ff6b6b;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    font-size: 1.8rem;
+}
+
+.connect-btn {
+    background: #4ecdc4;
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.1rem;
+    width: 200px;
+}
+
+.wallet-info {
+    background: rgba(255,255,255,0.1);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(10px);
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.staking-section {
+    background: rgba(255,255,255,0.15);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+input {
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.9);
+    font-size: 1rem;
+    width: 100%;
+}
+
+.action-btn {
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.stats {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.3);
+    text-align: center;
+}
+
+.info-section {
+    text-align: center;
+    opacity: 0.8;
+    margin-top: 20px;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 480px) {
+    body {
+        padding: 15px;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    .connect-btn, .action-btn {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+    
+    input {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+}

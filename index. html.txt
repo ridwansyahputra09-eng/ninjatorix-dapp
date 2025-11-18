@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>NINJATORIX - Staking DApp</title>
+    <script src="https://cdn.thirdweb.com/sdk.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🦸 NINJATORIX Staking</h1>
+            <button id="connectWallet" class="connect-btn">Connect Wallet</button>
+        </header>
+
+        <div id="walletInfo" class="wallet-info hidden">
+            <p>Connected: <span id="walletAddress"></span></p>
+            <p>Balance: <span id="tokenBalance">0</span> NINJX</p>
+        </div>
+
+        <div class="staking-section">
+            <h2>Stake Your NINJATORIX</h2>
+            
+            <div class="input-group">
+                <input type="number" id="stakeAmount" placeholder="Amount to stake" min="0">
+                <button id="stakeBtn" class="action-btn">Stake</button>
+            </div>
+
+            <div class="input-group">
+                <input type="number" id="unstakeAmount" placeholder="Amount to unstake" min="0">
+                <button id="unstakeBtn" class="action-btn">Unstake</button>
+            </div>
+
+            <div class="stats">
+                <p>Staked: <span id="stakedBalance">0</span> NINJX</p>
+                <p>Rewards: <span id="rewardsBalance">0</span> NINJX</p>
+                <button id="claimBtn" class="action-btn">Claim Rewards</button>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>🚀 Built 100% from Android!</h3>
+            <p>The first ninja-themed token on Polygon</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

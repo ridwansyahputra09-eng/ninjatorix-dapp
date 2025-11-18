@@ -1,0 +1,159 @@
+// Mobile-optimized DApp for NINJATORIX
+let sdk;
+let contract;
+let walletAddress;
+
+// CONFIG - GANTI DENGAN CONTRACT ANDA!
+const CONTRACT_ADDRESS = "0xYourContractAddressHere"; // GANTI!
+const CHAIN_ID = 80001; // Polygon Mumbai
+
+// Detect mobile
+function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+// Initialize
+async function initThirdWeb() {
+    try {
+        sdk = new ThirdwebSDK("mumbai");
+        contract = await sdk.getContract(CONTRACT_ADDRESS);
+        showMessage("DApp ready! Connect your wallet.");
+    } catch (error) {
+        showMessage("Error loading DApp. Check connection.");
+    }
+}
+
+// Connect Wallet - Mobile Optimized
+async function connectWallet() {
+    try {
+        if (isMobile() && !window.ethereum) {
+            // Open in MetaMask mobile
+            window.location.href = "https://metamask.app.link/dapp/" + window.location.hostname;
+            return;
+        }
+        
+        const accounts = await window.ethereum.request({
+            method: "eth_requestAccounts",
+        });
+        
+        if (accounts.length === 0) {
+            throw new Error("No accounts found");
+        }
+        
+        walletAddress = accounts[0];
+        document.getElementById("walletAddress").textContent = 
+            `${walletAddress.substring(0, 6)}...${walletAddress.substring(38)}`;
+        
+        document.getElementById("walletInfo").classList.remove("hidden");
+        document.getElementById("connectWallet").textContent = "Connected 🔗";
+        
+        await updateBalances();
+        showMessage("Wallet connected successfully!");
+        
+    } catch (error) {
+        console.error("Wallet connection error:", error);
+        if (isMobile()) {
+            showMessage("Please install MetaMask Mobile from Play Store!");
+        } else {
+            showMessage("Error connecting wallet. Install MetaMask!");
+        }
+    }
+}
+
+// Update balances
+async function updateBalances() {
+    if (!contract || !walletAddress) return;
+    
+    try {
+        // Get token balance
+        const balance = await contract.call("balanceOf", [walletAddress]);
+        const balanceFormatted = (balance / 1e18).toFixed(2);
+        document.getElementById("tokenBalance").textContent = balanceFormatted;
+        
+        showMessage("Balances updated!");
+        
+    } catch (error) {
+        console.error("Balance update error:", error);
+        showMessage("Error updating balances");
+    }
+}
+
+// Stake tokens
+async function stakeTokens() {
+    const amount = document.getElementById("stakeAmount").value;
+    if (!amount || amount <= 0) {
+        showMessage("Please enter valid amount");
+        return;
+    }
+    
+    try {
+        showMessage("Staking in progress...");
+        const amountWei = (amount * 1e18).toString();
+        
+        // For now, just simulate staking
+        // You'll need to implement actual staking in contract
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
+        showMessage("✅ Tokens staked successfully!");
+        document.getElementById("stakeAmount").value = "";
+        
+    } catch (error) {
+        console.error("Staking error:", error);
+        showMessage("❌ Staking failed");
+    }
+}
+
+// Unstake tokens
+async function unstakeTokens() {
+    const amount = document.getElementById("unstakeAmount").value;
+    if (!amount || amount <= 0) {
+        showMessage("Please enter valid amount");
+        return;
+    }
+    
+    try {
+        showMessage("Unstaking in progress...");
+        
+        // Simulate unstaking
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
+        showMessage("✅ Tokens unstaked successfully!");
+        document.getElementById("unstakeAmount").value = "";
+        
+    } catch (error) {
+        console.error("Unstaking error:", error);
+        showMessage("❌ Unstaking failed");
+    }
+}
+
+// Claim rewards
+async function claimRewards() {
+    try {
+        showMessage("Claiming rewards...");
+        
+        // Simulate claiming
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
+        showMessage("✅ Rewards claimed successfully!");
+        
+    } catch (error) {
+        console.error("Claim error:", error);
+        showMessage("❌ Claim failed");
+    }
+}
+
+// Show message to user
+function showMessage(message) {
+    // Simple alert for now - bisa diimprove dengan toast notification
+    alert(message);
+}
+
+// Event listeners
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("connectWallet").addEventListener("click", connectWallet);
+    document.getElementById("stakeBtn").addEventListener("click", stakeTokens);
+    document.getElementById("unstakeBtn").addEventListener("click", unstakeTokens);
+    document.getElementById("claimBtn").addEventListener("click", claimRewards);
+    
+    initThirdWeb();
+});
